@@ -9,25 +9,69 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: amazonlinux2
-    image: amazonlinux:2
-  - name: debian9
-    image: debian:stretch-slim
-    dockerfile: Dockerfile_debian_9.j2
-  - name: debian10
-    image: debian:buster-slim
-  - name: debian11
-    image: debian:bullseye-slim
-  - name: kali
-    image: kalilinux/kali-rolling
-  - name: fedora32
-    image: fedora:32
-  - name: fedora33
-    image: fedora:33
-  - name: ubuntu16
-    image: ubuntu:xenial
-  - name: ubuntu18
-    image: ubuntu:bionic
+  - name: amazonlinux2_systemd
+    image: geerlingguy/docker-amazonlinux2-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian9_systemd
+    image: geerlingguy/docker-debian9-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian10_systemd
+    image: geerlingguy/docker-debian10-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian11_systemd
+    image: cisagov/docker-debian11-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: kali_systemd
+    image: cisagov/docker-kali-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora32_systemd
+    image: geerlingguy/docker-fedora32-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora33_systemd
+    image: cisagov/docker-fedora33-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_bionic_systemd
+    image: geerlingguy/docker-ubuntu1604-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_xenial_systemd
+    image: geerlingguy/docker-ubuntu1804-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
 provisioner:
   name: ansible
   config_options:
