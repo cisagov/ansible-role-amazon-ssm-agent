@@ -1,0 +1,5 @@
+---
+# vars file for Debian
+
+# The URL to the deb package to install for amazon-ssm-agent
+package_url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb

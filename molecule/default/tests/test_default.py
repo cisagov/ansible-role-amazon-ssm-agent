@@ -12,22 +12,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-def test_packages(host):
+@pytest.mark.parametrize("pkg", ["amazon-ssm-agent"])
+def test_packages(host, pkg):
     """Test that the appropriate packages were installed."""
-    distribution = host.system_info.distribution
-    if distribution == "fedora":
-        pkgs = ["make", "rpm-build", "amazon-ssm-agent"]
-    elif distribution == "debian" or distribution == "ubuntu" or distribution == "kali":
-        pkgs = ["make", "binutils", "amazon-ssm-agent"]
-    elif distribution == "amzn":
-        pkgs = ["amazon-ssm-agent"]
-    else:
-        # We don't support this distribution
-        assert False
-    packages = [host.package(pkg) for pkg in pkgs]
-    installed = [package.is_installed for package in packages]
-    assert len(pkgs) != 0
-    assert all(installed)
+    assert host.package(pkg).is_installed
 
 
 @pytest.mark.parametrize("service", ["amazon-ssm-agent"])

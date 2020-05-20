@@ -1,0 +1,4 @@
+---
+- name: Download and install amazon-ssm-agent rpm package
+  dnf:
+    name: "{{ package_url }}"

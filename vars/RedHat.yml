@@ -1,0 +1,5 @@
+---
+# vars file for RedHat
+
+# The URL to the rpm package to install for amazon-ssm-agent
+package_url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm

@@ -1,0 +1,5 @@
+---
+- name: Install amazon-ssm-agent
+  package:
+    name:
+      - amazon-ssm-agent
