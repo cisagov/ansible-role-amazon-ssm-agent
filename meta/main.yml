@@ -3,6 +3,10 @@ galaxy_info:
   author: Shane Frasier
   description: Install AWS SSM agent
   company: CISA Cyber Assessments
+  galaxy_tags:
+    - aws
+    - ssm
+    - ssmagent
   license: CC0
   min_ansible_version: 2.0
   platforms:
@@ -25,9 +29,6 @@ galaxy_info:
       versions:
         - bionic
         - xenial
-  galaxy_tags:
-    - aws
-    - ssm
-    - ssmagent
+  role_name: ssm_agent
 
 dependencies: []
