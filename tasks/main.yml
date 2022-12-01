@@ -2,7 +2,7 @@
 # tasks file for amazon-ssm-agent
 
 - name: Load var file with package names based on the OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -24,6 +24,6 @@
         - "{{ role_path }}/tasks"
 
 - name: Enable Amazon SSM Agent service
-  service:
+  ansible.builtin.service:
     name: amazon-ssm-agent
     enabled: yes

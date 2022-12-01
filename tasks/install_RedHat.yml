@@ -1,6 +1,6 @@
 ---
 - name: Download and install amazon-ssm-agent rpm package
-  dnf:
+  ansible.builtin.dnf:
     # The amazon-ssm-agent RPM is currently unsigned:
     # https://github.com/aws/amazon-ssm-agent/issues/235
     disable_gpg_check: yes
