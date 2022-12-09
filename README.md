@@ -1,8 +1,7 @@
 # ansible-role-amazon-ssm-agent #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-amazon-ssm-agent/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-amazon-ssm-agent/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-amazon-ssm-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-amazon-ssm-agent/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-amazon-ssm-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-amazon-ssm-agent/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-amazon-ssm-agent/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-amazon-ssm-agent/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing
 [amazon-ssm-agent](https://github.com/aws/amazon-ssm-agent).
@@ -34,8 +33,10 @@ Here's how to use it in a playbook:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - amazon-ssm-agent
+  tasks:
+    - name: Include Amazon SSM agent
+      ansible.builtin.include_role:
+        name: amazon-ssm-agent
 ```
 
 ## Contributing ##
