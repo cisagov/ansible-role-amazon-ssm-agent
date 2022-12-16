@@ -1,5 +1,5 @@
 ---
 - name: Install amazon-ssm-agent
-  package:
+  ansible.builtin.package:
     name:
       - amazon-ssm-agent
