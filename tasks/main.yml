@@ -23,5 +23,5 @@
 
 - name: Enable Amazon SSM Agent service
   ansible.builtin.service:
-    enabled: yes
+    enabled: true
     name: amazon-ssm-agent

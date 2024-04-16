@@ -25,6 +25,28 @@ None.
 
 None.
 
+## Installation ##
+
+This role can be installed via the command:
+
+```console
+ansible-galaxy install --role-file path/to/requirements.yml
+```
+
+where `requirements.yml` looks like:
+
+```yaml
+---
+- name: amazon_ssm_agent
+  src: https://github.com/cisagov/ansible-role-amazon-ssm-agent
+```
+
+and may contain other roles as well.
+
+For more information about installing Ansible roles via a YAML file,
+please see [the `ansible-galaxy`
+documentation](https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#installing-multiple-roles-from-a-file).
+
 ## Example Playbook ##
 
 Here's how to use it in a playbook:
@@ -36,7 +58,7 @@ Here's how to use it in a playbook:
   tasks:
     - name: Install Amazon SSM agent
       ansible.builtin.include_role:
-        name: amazon-ssm-agent
+        name: amazon_ssm_agent
 ```
 
 ## Contributing ##
