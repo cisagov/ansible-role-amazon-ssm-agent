@@ -37,8 +37,8 @@ where `requirements.yml` looks like:
 
 ```yaml
 ---
-- name: skeleton
-  src: https://github.com/cisagov/skeleton-ansible-role
+- name: amazon_ssm_agent
+  src: https://github.com/cisagov/ansible-role-amazon-ssm-agent
 ```
 
 and may contain other roles as well.
@@ -58,7 +58,7 @@ Here's how to use it in a playbook:
   tasks:
     - name: Install Amazon SSM agent
       ansible.builtin.include_role:
-        name: amazon-ssm-agent
+        name: amazon_ssm_agent
 ```
 
 ## Contributing ##
