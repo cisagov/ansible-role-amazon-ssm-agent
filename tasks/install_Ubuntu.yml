@@ -1,0 +1,17 @@
+---
+# According to the documentation from AWS, the SSM Agent should be
+# installed via snap on all Ubuntu versions that we support:
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-64-snap.html
+
+- name: Install snapd
+  ansible.builtin.package:
+    name:
+      - snapd
+
+- name: Install amazon-ssm-agent via snap
+  community.general.snap:
+    # The version of amazon-ssm-agent currently available in the
+    # stable channel requires this.
+    classic: true
+    name:
+      - amazon-ssm-agent
