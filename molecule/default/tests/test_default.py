@@ -12,13 +12,42 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize("pkg", ["amazon-ssm-agent"])
-def test_packages(host, pkg):
+def test_packages(host):
     """Test that the appropriate packages were installed."""
-    assert host.package(pkg).is_installed
+    distribution = host.system_info.distribution
+
+    packages = None
+    snaps = None
+    if distribution in ["amzn", "debian", "fedora", "kali"]:
+        packages = ["amazon-ssm-agent"]
+    elif distribution in ["ubuntu"]:
+        packages = ["snapd"]
+        snaps = ["amazon-ssm-agent"]
+    else:
+        assert False, f"Unknown distribution {distribution}"
+
+    assert all([host.package(pkg).is_installed for pkg in packages])
+
+    if distribution in ["ubuntu"]:
+        assert all([host.run(f"snap list {snap}").rc == 0 for snap in snaps])
 
 
 @pytest.mark.parametrize("service", ["amazon-ssm-agent"])
 def test_services(host, service):
     """Test that the expected services were enabled."""
-    assert host.service(service).is_enabled
+    distribution = host.system_info.distribution
+
+    services = None
+    snap_services = None
+    if distribution in ["amzn", "debian", "fedora", "kali"]:
+        services = ["amazon-ssm-agent"]
+    elif distribution in ["ubuntu"]:
+        services = ["snapd.service", "snap.amazon-ssm-agent.amazon-ssm-agent.service"]
+        snap_services = ["amazon-ssm-agent"]
+    else:
+        assert False, f"Unknown distribution {distribution}"
+
+    assert all([host.service(svc).is_enabled for svc in services])
+
+    if distribution in ["ubuntu"]:
+        assert all([host.run(f"snap services {svc}").rc == 0 for svc in snap_services])
