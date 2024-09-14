@@ -4,7 +4,10 @@
 [![CodeQL](https://github.com/cisagov/ansible-role-amazon-ssm-agent/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-amazon-ssm-agent/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing
-[amazon-ssm-agent](https://github.com/aws/amazon-ssm-agent).
+[amazon-ssm-agent](https://github.com/aws/amazon-ssm-agent).  Note
+that the agent is installed via a [Snap](https://snapcraft.io/about)
+on Ubuntu, in accordance with [the AWS
+documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-64-snap.html).
 
 ## Requirements ##
 

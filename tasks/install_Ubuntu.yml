@@ -1,0 +1,36 @@
+---
+# According to the documentation from AWS, the SSM Agent should be
+# installed via snap on all Ubuntu versions that we support:
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-64-snap.html
+
+- name: Install and configure community.general.snap prerequisites
+  block:
+    - name: Install the snapd package
+      ansible.builtin.package:
+        name:
+          - snapd
+    - name: Start the snapd service so it can initialize itself
+      ansible.builtin.systemd_service:
+        name: snapd.service
+        state: started
+    - name: Start and enable the snapd socket
+      ansible.builtin.systemd_service:
+        enabled: true
+        name: snapd.socket
+        state: started
+
+# When testing in Molecule using Docker, this command usually fails
+# the first time we run it; therefore we add some Ansible foo to rerun
+# the task until it succeeds.
+- name: Install amazon-ssm-agent via snap
+  community.general.snap:
+    # The version of amazon-ssm-agent currently available in the
+    # stable channel requires this.
+    classic: true
+    name:
+      - amazon-ssm-agent
+  delay: 5
+  ignore_errors: true
+  register: snap_install
+  retries: 5
+  until: not snap_install.failed
