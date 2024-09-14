@@ -24,8 +24,11 @@
 # the task until it succeeds.
 - name: Install amazon-ssm-agent via snap
   community.general.snap:
+    # The candidate channel corresponds to the version we get by
+    # installing system packages on the other platforms we support.
+    channel: candidate
     # The version of amazon-ssm-agent currently available in the
-    # stable channel requires this.
+    # stable and candidate channels requires this.
     classic: true
     name:
       - amazon-ssm-agent
