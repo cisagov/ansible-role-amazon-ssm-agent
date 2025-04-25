@@ -8,7 +8,9 @@ architectures:
   x86_64: amd64
 
 # The URL to the deb package to install for amazon-ssm-agent
-package_url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{ architectures[ansible_architecture] }}/amazon-ssm-agent.deb
+package_url: >-
+  https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{
+  architectures[ansible_architecture] }}/amazon-ssm-agent.deb
 
 # The name of the systemd service for amazon-ssm-agent.
 service_name: amazon-ssm-agent
