@@ -1,6 +1,7 @@
 # ansible-role-amazon-ssm-agent #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-amazon-ssm-agent/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-amazon-ssm-agent/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-amazon-ssm-agent)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-amazon-ssm-agent/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-amazon-ssm-agent/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing
