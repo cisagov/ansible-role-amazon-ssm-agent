@@ -24,7 +24,7 @@ def test_packages(host):
         packages = ["snapd"]
         snaps = ["amazon-ssm-agent"]
     else:
-        assert False, f"Unknown distribution {distribution}"
+        raise ValueError(f"Unknown distribution {distribution}")
 
     assert all([host.package(pkg).is_installed for pkg in packages])
 
@@ -45,7 +45,7 @@ def test_services(host, service):
         services = ["snapd.service", "snap.amazon-ssm-agent.amazon-ssm-agent.service"]
         snap_services = ["amazon-ssm-agent"]
     else:
-        assert False, f"Unknown distribution {distribution}"
+        raise ValueError(f"Unknown distribution {distribution}")
 
     assert all([host.service(svc).is_enabled for svc in services])
 
