@@ -24,12 +24,12 @@ def test_packages(host):
         packages = ["snapd"]
         snaps = ["amazon-ssm-agent"]
     else:
-        assert False, f"Unknown distribution {distribution}"
+        raise ValueError(f"Unknown distribution {distribution}")
 
-    assert all([host.package(pkg).is_installed for pkg in packages])
+    assert all(host.package(pkg).is_installed for pkg in packages)
 
     if distribution in ["ubuntu"]:
-        assert all([host.run(f"snap list {snap}").rc == 0 for snap in snaps])
+        assert all(host.run(f"snap list {snap}").rc == 0 for snap in snaps)
 
 
 @pytest.mark.parametrize("service", ["amazon-ssm-agent"])
@@ -45,9 +45,9 @@ def test_services(host, service):
         services = ["snapd.service", "snap.amazon-ssm-agent.amazon-ssm-agent.service"]
         snap_services = ["amazon-ssm-agent"]
     else:
-        assert False, f"Unknown distribution {distribution}"
+        raise ValueError(f"Unknown distribution {distribution}")
 
-    assert all([host.service(svc).is_enabled for svc in services])
+    assert all(host.service(svc).is_enabled for svc in services)
 
     if distribution in ["ubuntu"]:
-        assert all([host.run(f"snap services {svc}").rc == 0 for svc in snap_services])
+        assert all(host.run(f"snap services {svc}").rc == 0 for svc in snap_services)
